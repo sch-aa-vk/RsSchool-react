@@ -1,10 +1,16 @@
+import { ErrorIcon } from '../../assets/ErrorIcon';
 import { Header } from '../../layouts/Header';
+
+import './style.css';
 
 export const Page404 = () => {
   return (
-    <div>
+    <>
       <Header path="*" />
-      <h1>page is undefined</h1>
-    </div>
+      <div className="page-404">
+        <h1 className="page-404__header">This address does not exist, please change pathname</h1>
+        <ErrorIcon />
+      </div>
+    </>
   );
 };
