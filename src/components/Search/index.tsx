@@ -16,6 +16,10 @@ export class Search extends Component<ISearch> {
     };
   }
 
+  componentWillUnmount() {
+    localStorage['input-value'] = this.state.value;
+  }
+
   onUpdateSearch = () => {
     this.props.onUpdateSearch(this.state.value);
   };

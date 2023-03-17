@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getPageName } from '../../utils';
 
 import './style.css';
 
@@ -8,7 +9,7 @@ type header = {
 };
 
 export const Header: React.FC<header> = ({ path }) => {
-  const pagename = path.slice(1).split('-').join(' ') || (path === '/' ? 'Home Page' : 'Page 404');
+  const pagename = getPageName(path);
   return (
     <div className="header">
       <Link className="header__path" to={path}>

@@ -11,11 +11,7 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-      })
-    ).toHaveTextContent('Not Found');
+    expect(screen.getByText('Page 404')).toBeInTheDocument();
   });
   it('Renders Home Page if path is correct', () => {
     render(
@@ -23,10 +19,29 @@ describe('App', () => {
         <App />
       </MemoryRouter>
     );
+    expect(screen.getByText('Home Page')).toBeInTheDocument();
+  });
+  it('Renders About Us if path is correct', () => {
+    render(
+      <MemoryRouter initialEntries={['/about-us']}>
+        <App />
+      </MemoryRouter>
+    );
+    expect(screen.getByText('About Us')).toBeInTheDocument();
+  });
+});
+
+describe('AboutUs', () => {
+  it('Render AboutUs component', () => {
+    render(
+      <MemoryRouter initialEntries={['/about-us']}>
+        <App />
+      </MemoryRouter>
+    );
     expect(
       screen.getByRole('heading', {
         level: 1,
       })
-    ).toHaveTextContent('Home Page');
+    ).toHaveTextContent('This page is currently empty');
   });
 });

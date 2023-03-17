@@ -18,7 +18,6 @@ export class Home extends Component {
   }
 
   onUpdateSearch = (value: string) => {
-    localStorage['input-value'] = value;
     this.setState({ value });
   };
 
