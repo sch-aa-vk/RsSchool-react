@@ -1,10 +1,12 @@
 import { Header } from '../../layouts/Header';
 
+import './style.css';
+
 export const AboutUs = () => {
   return (
-    <div className="">
+    <>
       <Header path="/about-us" />
-      <h1>About Us</h1>
-    </div>
+      <h1 className="about__header">This page is currently empty</h1>
+    </>
   );
 };
