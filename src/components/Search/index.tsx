@@ -3,14 +3,22 @@ import { SearchIcon } from '../../assets/SearchIcon';
 
 import './style.css';
 
-export class Search extends Component {
+interface ISearch {
+  onUpdateSearch: (value: string) => void;
+}
+
+export class Search extends Component<ISearch> {
   state: { value: string };
-  constructor(props: {} | Readonly<{}>) {
+  constructor(props: ISearch) {
     super(props);
     this.state = {
       value: localStorage['input-value'] ? localStorage['input-value'] : '',
     };
   }
+
+  onUpdateSearch = () => {
+    this.props.onUpdateSearch(this.state.value);
+  };
 
   render() {
     return (
@@ -24,7 +32,7 @@ export class Search extends Component {
           />
           <SearchIcon />
         </div>
-        <button className="search__button" type="button">
+        <button className="search__button" type="button" onClick={this.onUpdateSearch}>
           Search
         </button>
       </div>
