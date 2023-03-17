@@ -1,10 +1,35 @@
-import { Header } from '../../layouts/Header';
+import { Component } from 'react';
 
-export const Home = () => {
-  return (
-    <div className="home">
-      <Header path="/" />
-      <h1>Home Page</h1>
-    </div>
-  );
-};
+import data, { IProduct } from '../../database';
+import { Header } from '../../components/Header';
+import { Search } from '../../components/Search';
+import { Card } from '../../components/Card';
+
+import './style.css';
+
+export class Home extends Component {
+  state: { value: string; products: IProduct[] };
+  constructor(props: {} | Readonly<{}>) {
+    super(props);
+    this.state = {
+      value: localStorage['input-value'] ? localStorage['input-value'] : '',
+      products: data,
+    };
+  }
+
+  render() {
+    return (
+      <>
+        <Header path="/" />
+        <div className="home">
+          <Search />
+          <div className="cards__wrapper">
+            {this.state.products.map((product) => {
+              return <Card key={product.id} {...product} />;
+            })}
+          </div>
+        </div>
+      </>
+    );
+  }
+}

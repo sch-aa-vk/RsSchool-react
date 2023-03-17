@@ -1,5 +1,5 @@
 import { ErrorIcon } from '../../assets/ErrorIcon';
-import { Header } from '../../layouts/Header';
+import { Header } from '../../components/Header';
 
 import './style.css';
 
