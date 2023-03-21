@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { SearchIcon } from '../../assets/SearchIcon';
+import { InputText } from '../../components/InputText';
 
 import './style.css';
 
@@ -28,11 +29,12 @@ export class Search extends Component<ISearch> {
     return (
       <div className="search">
         <div className="search__input-wrapper">
-          <input
-            className="search__input"
-            type="text"
+          <InputText
+            classname="search__input"
             value={this.state.value}
-            onChange={(e) => this.setState({ value: e.target.value })}
+            fn={(e: React.ChangeEvent<HTMLInputElement>) =>
+              this.setState({ value: e.target.value })
+            }
           />
           <SearchIcon />
         </div>

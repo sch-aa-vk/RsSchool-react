@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 import data, { IProduct } from '../../database';
-import { Search } from '../../components/Search';
+import { Search } from '../../layouts/Search';
 import { Card } from '../../components/Card';
 
 import './style.css';

@@ -1,0 +1,32 @@
+.input {
+  padding: 10px 0 10px 30px;
+  border-radius: 5px;
+  border: 1px solid #5B8FB9;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #537FE7;
+  outline: none;
+}
+
+.search__input {
+  width: 400px;
+}
+
+.click__pointer {
+  cursor: pointer;
+}
+
+.feedback__input {
+  padding: 5px 10px;
+}
+
+@media screen and (max-width: 510px) {
+  .search__input {
+    width: 300px;
+  }
+}
+
+.search__input:focus {
+  border: 1px solid #537FE7;
+}
