@@ -1,0 +1,145 @@
+.card {
+  position: relative;
+  height: 370px;
+  width: 280px;
+  margin: 10px 10px;
+  border: 1px solid rgba(3, 0, 28, 0.2);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.card__category {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: all 0.2s ease-in;
+}
+
+.card__category-text {
+  opacity: 0;
+  padding: 10px 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: capitalize;
+  transition: all 0.2s ease-in;
+}
+
+.card__image-wrapper:hover > .card__category {
+  height: 50px;
+}
+
+.card__image-wrapper:hover > .card__category > .card__category-text {
+  opacity: 1;
+}
+
+.card__rate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card__rate-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #fff;
+}
+
+.card__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 10px 5px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #03001C;
+}
+
+.card__description {
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.card__description-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: calc(1.2em * 6); 
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  width: 100%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: rgba(3, 0, 28, 0.5);
+  text-transform: lowercase;
+}
+
+.card__description-text:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.card__description-text:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 1em;
+  height: 1em;
+  margin-top: 0.2em;
+  background: #fff;
+}
+
+.card__info {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card__info-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: rgb(40, 40, 42);
+  text-transform: lowercase;
+}
+
+.card__info-dot {
+  color: #5B8FB9;
+}
