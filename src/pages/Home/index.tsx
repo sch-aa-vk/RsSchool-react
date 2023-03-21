@@ -1,7 +1,6 @@
 import { Component } from 'react';
 
 import data, { IProduct } from '../../database';
-import { Header } from '../../components/Header';
 import { Search } from '../../components/Search';
 import { Card } from '../../components/Card';
 
@@ -34,7 +33,6 @@ export class Home extends Component {
     const products = this.state.products.filter(this.filterItems);
     return (
       <>
-        <Header path="/" />
         <div className="home">
           <Search onUpdateSearch={this.onUpdateSearch} />
           <div className="cards__wrapper">
