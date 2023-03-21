@@ -1,28 +1,28 @@
-import React from 'react';
+import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getPageName } from '../../utils';
+import { withRouter, WithRouterProps } from '../../utils/withRouter';
 
 import './style.css';
 
-type header = {
-  path: string;
-};
+export const Header = withRouter((props) => <HeaderComponent {...props} />);
 
-export const Header: React.FC<header> = ({ path }) => {
-  const pagename = getPageName(path);
-  return (
-    <div className="header">
-      <Link className="header__path" to={path}>
-        {pagename}
-      </Link>
-      <div className="header__links">
-        <Link className="header__links-link" to="/">
-          Home
+export class HeaderComponent extends Component<WithRouterProps> {
+  render() {
+    return (
+      <div className="header">
+        <Link className="header__path" to={this.props.location.pathname}>
+          {getPageName(this.props.location.pathname)}
         </Link>
-        <Link className="header__links-link" to="/about-us">
-          About
-        </Link>
+        <div className="header__links">
+          <Link className="header__links-link" to="/">
+            Home
+          </Link>
+          <Link className="header__links-link" to="/about-us">
+            About
+          </Link>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
