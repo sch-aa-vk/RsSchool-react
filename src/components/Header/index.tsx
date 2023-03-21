@@ -21,6 +21,9 @@ export class HeaderComponent extends Component<WithRouterProps> {
           <Link className="header__links-link" to="/about-us">
             About
           </Link>
+          <Link className="header__links-link" to="/forms">
+            Forms
+          </Link>
         </div>
       </div>
     );
