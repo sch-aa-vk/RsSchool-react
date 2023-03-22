@@ -6,3 +6,21 @@
   justify-content: center;
   align-items: center;
 }
+
+.forms__title {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #03001C;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form__wrapper {
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, rgba(255,255,255,1), rgba(91,143,185,0.2) 50vw, rgba(255,255,255,1) 100vw);
+}

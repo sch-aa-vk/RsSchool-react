@@ -74,7 +74,7 @@ export class FormFeedback extends Component {
           <p className="form-text">Did you like our products?</p>
           <div className="form__block form__block-row">
             <label htmlFor="input-yes" className="label label-radio">
-              yes <input type="radio" name="like" id="input-yes" />
+              yes <input defaultChecked type="radio" name="like" id="input-yes" />
             </label>
             <label htmlFor="input-no" className="label label-radio">
               no <input type="radio" name="like" id="input-no" />
