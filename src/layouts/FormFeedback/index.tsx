@@ -38,7 +38,7 @@ export class FormFeedback extends Component {
           </label>
         </div>
         <div className="form__block">
-          <p className="form-text">What type of product(s) did you order?</p>
+          <p className="form-text form-text__with-margin">What type of product(s) did you order?</p>
           <div className="block-fullsize">
             <input className="checkbox" type="checkbox" id="input-tv" name="order" />
             <label htmlFor="input-tv" className="label label-fullsize label-checkbox">
@@ -72,19 +72,21 @@ export class FormFeedback extends Component {
         </div>
         <div className="form__block form__block-row form__block-start">
           <p className="form-text">Did you like our products?</p>
-          <label htmlFor="input-yes" className="label label-radio">
-            yes <input type="radio" name="like" id="input-yes" />
-          </label>
-          <label htmlFor="input-no" className="label label-radio">
-            no <input type="radio" name="like" id="input-no" />
-          </label>
+          <div className="form__block form__block-row">
+            <label htmlFor="input-yes" className="label label-radio">
+              yes <input type="radio" name="like" id="input-yes" />
+            </label>
+            <label htmlFor="input-no" className="label label-radio">
+              no <input type="radio" name="like" id="input-no" />
+            </label>
+          </div>
         </div>
         <div className="form__block form__block-row">
-          <p className="form-text">Image of your order:</p>
+          <p className="form-text form-text-not-important">Image of your order:</p>
           <label className="input-file">
             <span className="input-file-text" />
             <input type="file" name="file" />
-            <span className="input-file-btn">Выберите файл</span>
+            <span className="input-file-btn">Choose file</span>
           </label>
         </div>
         <button className="feedback-button" type="submit" form="feedback-form">
