@@ -5,7 +5,7 @@ export function getPageName(path: string) {
     case '/about-us':
       return 'About Us';
     case '/forms':
-      return 'Forms';
+      return 'Forms Page';
     default:
       return 'Page 404';
   }

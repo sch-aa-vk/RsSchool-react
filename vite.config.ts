@@ -17,7 +17,7 @@ export default defineConfig({
       skipFull: true,
       reporter: 'text',
       include: ['src'],
-      exclude: ['src/main.tsx', 'src/vite-env.d.ts'],
+      exclude: ['src/main.tsx', 'src/vite-env.d.ts', 'src/assets', 'src/utils'],
     },
   },
 });

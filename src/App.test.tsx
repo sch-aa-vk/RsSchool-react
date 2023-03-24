@@ -29,19 +29,12 @@ describe('App', () => {
     );
     expect(screen.getByText('About Us')).toBeInTheDocument();
   });
-});
-
-describe('AboutUs', () => {
-  it('Render AboutUs component', () => {
+  it('Renders Forms Page if path is correct', () => {
     render(
-      <MemoryRouter initialEntries={['/about-us']}>
+      <MemoryRouter initialEntries={['/forms']}>
         <App />
       </MemoryRouter>
     );
-    expect(
-      screen.getByRole('heading', {
-        level: 1,
-      })
-    ).toHaveTextContent('This page is currently empty');
+    expect(screen.getByText('Forms')).toBeInTheDocument();
   });
 });

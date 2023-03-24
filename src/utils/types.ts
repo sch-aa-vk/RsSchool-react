@@ -14,5 +14,4 @@ export interface IFeedback {
     no: boolean;
   };
   file: string;
-  id: number;
 }
