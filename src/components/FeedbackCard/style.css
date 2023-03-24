@@ -1,0 +1,67 @@
+.feedback__card {
+  min-height: 380px;
+  width: 300px;
+  border: 1px solid rgba(3, 0, 28, 0.2);
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.feedback__card-title {
+  width: 100%;
+  padding: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: #03001C;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.feedback__card-image {
+  width: 100%;
+  height: 200px;
+  background: rgba(91, 143, 185, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback__card-image-text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 16px;
+  color: #03001C;
+}
+
+.feedback__card-text {
+  padding: 5px 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 18px;
+  color: rgba(3, 0, 28, 0.75);
+}
+
+.text-highlighted {
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.feedback__card-products {
+  padding: 0 10px;
+  align-self: flex-start;
+}
+
+.feedback__card-description {
+  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}

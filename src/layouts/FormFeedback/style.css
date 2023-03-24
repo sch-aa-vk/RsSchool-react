@@ -108,12 +108,18 @@
   color: #03001C;
 }
 
-.form-text__with-margin {
-  margin-bottom: 10px;
+.block__with-margin {
+  margin-top: 10px;
 }
 
-.form-text-not-important::before {
+.form-text-not-important::before,
+.form-text__warning::before {
   display: none;
+}
+
+.form-text__warning {
+  font-size: 16px;
+  color: #FF0303;
 }
 
 .block-fullsize {
@@ -129,7 +135,6 @@
 
 .input-file-text {
 	padding: 0 10px;
-	line-height: 40px;
 	text-align: left;
 	height: 40px;
   width: 190px;
@@ -138,6 +143,11 @@
 	box-sizing: border-box;
 	border-radius: 6px 0px 0 6px;
 	border: 1px solid #5B8FB9;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  color: #537FE7;
 }
 
 .input-file-btn {

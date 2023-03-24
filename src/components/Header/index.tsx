@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { getPageName } from '../../utils';
+import { getPageName } from '../../utils/functions';
 import { withRouter, WithRouterProps } from '../../utils/withRouter';
 
 import './style.css';

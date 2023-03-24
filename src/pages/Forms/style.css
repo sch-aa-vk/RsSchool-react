@@ -1,6 +1,6 @@
 .forms {
-  widows: 100%;
-  padding: 40px 10px 0;
+  width: 100%;
+  padding: 0 10px;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -8,11 +8,11 @@
 }
 
 .forms__title {
+  padding: 20px 0;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 400;
   font-size: 30px;
   color: #03001C;
-  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -23,4 +23,20 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(90deg, rgba(255,255,255,1), rgba(91,143,185,0.2) 50vw, rgba(255,255,255,1) 100vw);
+}
+
+.feedback__wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.forms__text-not-found {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 300;
+  font-size: 20px;
+  color: rgba(3, 0, 28, 0.5);
 }
