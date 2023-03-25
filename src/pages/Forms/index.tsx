@@ -6,16 +6,20 @@ import { IFeedback } from '../../utils/types';
 import './style.css';
 
 export class Forms extends Component {
-  state: { data: Array<IFeedback> };
+  state: { data: Array<IFeedback>; status: string };
   constructor(props: {}) {
     super(props);
     this.state = {
       data: localStorage['input-feedback'] ? JSON.parse(localStorage['input-feedback']) : '',
+      status: 'in process',
     };
   }
 
   onUpdateData = (data: Array<IFeedback>) => {
-    this.setState({ data });
+    this.setState({ data, status: 'confirmed' });
+    setTimeout(() => {
+      this.setState({ status: 'in process' });
+    }, 1500);
   };
 
   render() {
@@ -23,8 +27,20 @@ export class Forms extends Component {
       localStorage['input-feedback'] = '[]';
     }
     return (
-      <div className="forms">
-        <h2 className="forms__title">Please leave us your feedback</h2>
+      <div
+        className="forms"
+        style={{
+          backgroundImage: `url(${
+            this.state.status === 'confirmed'
+              ? 'https://cliply.co/wp-content/uploads/2021/09/CLIPLY_372109170_FREE_FIREWORKS_400.gif'
+              : ''
+          })`,
+        }}
+      >
+        <h2 className="forms__title">
+          Please leave us your feedback.
+          <span className="forms__title-thin">Feedback {this.state.status}</span>
+        </h2>
         <div className="form__wrapper">
           <FormFeedback onUpdateData={this.onUpdateData} />
         </div>

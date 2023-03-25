@@ -5,6 +5,9 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  background-position: top;
+  background-size: auto;
+  background-repeat: no-repeat;
 }
 
 .forms__title {
@@ -14,6 +17,16 @@
   font-size: 30px;
   color: #03001C;
   text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.forms__title-thin {
+  font-weight: 300;
+  font-size: 16px;
+  text-transform: lowercase;
+  color: #3cb043;
+  opacity: 0.5;
 }
 
 .form__wrapper {
