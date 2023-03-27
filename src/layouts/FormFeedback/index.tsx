@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { Component, createRef, RefObject } from 'react';
 import { IFeedback } from '../../utils/types';
+import { CountryDateSelect } from '../../components/CountryDateSelect';
+import { ProductSelect } from '../../components/ProductSelect';
+import { LikeSelect } from '../../components/LikeSelect/inex';
+import { FileSelect } from '../../components/FileSelect';
 
 import './style.css';
 
@@ -109,138 +113,18 @@ export class FormFeedback extends Component<IFormFeedback> {
         ) : (
           <></>
         )}
-        <div className="form__block form__block-row">
-          <label className="label label-fullsize">
-            Order date:
-            <input
-              className="input feedback__input click__pointer"
-              ref={this.dateRef}
-              type="date"
-              required
-            />
-          </label>
-          <label htmlFor="input-country" className="label label-fullsize">
-            Country of order:
-            <select
-              id="input-name"
-              ref={this.countryRef}
-              className="input feedback__input click__pointer"
-              required
-            >
-              <option value="kz" defaultChecked>
-                Kazakhstan
-              </option>
-              <option value="uk">Ukrain</option>
-              <option value="by">Belarus</option>
-              <option value="ru">Russia</option>
-            </select>
-          </label>
-        </div>
-        <div className="form__block">
-          <p className="form-text">What type of product(s) did you order?</p>
-          {this.state.warningProduct ? (
-            <p className="form-text form-text__warning">choose minimum one product!</p>
-          ) : (
-            <></>
-          )}
-          <div className="block-fullsize block__with-margin">
-            <input
-              className="checkbox"
-              ref={this.tvRef}
-              type="checkbox"
-              id="input-tv"
-              name="order"
-              onChange={this.handleCheckbox}
-            />
-            <label htmlFor="input-tv" className="label label-fullsize label-checkbox">
-              TV
-            </label>
-          </div>
-          <div className="block-fullsize">
-            <input
-              className="checkbox"
-              ref={this.electroRef}
-              type="checkbox"
-              id="input-electronics"
-              name="order"
-              onChange={this.handleCheckbox}
-            />
-            <label htmlFor="input-electronics" className="label label-fullsize label-checkbox">
-              Electronics
-            </label>
-          </div>
-          <div className="block-fullsize">
-            <input
-              className="checkbox"
-              ref={this.jewRef}
-              type="checkbox"
-              id="input-jewelery"
-              name="order"
-              onChange={this.handleCheckbox}
-            />
-            <label htmlFor="input-jewelery" className="label label-fullsize label-checkbox">
-              Jewelery
-            </label>
-          </div>
-          <div className="block-fullsize">
-            <input
-              className="checkbox"
-              ref={this.wclthRef}
-              id="input-women-clothes"
-              type="checkbox"
-              name="order"
-              onChange={this.handleCheckbox}
-            />
-            <label htmlFor="input-women-clothes" className="label label-fullsize label-checkbox">
-              Women clothes
-            </label>
-          </div>
-          <div className="block-fullsize">
-            <input
-              className="checkbox"
-              ref={this.mclthRef}
-              id="input-men-clothes"
-              type="checkbox"
-              name="order"
-              onChange={this.handleCheckbox}
-            />
-            <label htmlFor="input-men-clothes" className="label label-fullsize label-checkbox">
-              Men clothes
-            </label>
-          </div>
-        </div>
-        <div className="form__block form__block-row form__block-start">
-          <p className="form-text">Did you like our products?</p>
-          <div className="form__block form__block-row">
-            <label htmlFor="input-yes" className="label label-radio">
-              yes
-              <input
-                defaultChecked
-                ref={this.yesRef}
-                type="radio"
-                name="like"
-                id="input-yes"
-                required
-              />
-            </label>
-            <label htmlFor="input-no" className="label label-radio">
-              no <input type="radio" ref={this.noRef} name="like" id="input-no" required />
-            </label>
-          </div>
-        </div>
-        <div className="form__block form__block-row">
-          <p className="form-text form-text-not-important">Image of your order:</p>
-          <label className="input-file">
-            <span className="input-file-text">{this.state.image}</span>
-            <input
-              type="file"
-              name="file"
-              ref={this.fileRef}
-              onChange={() => this.setState({ image: this.fileRef.current?.files![0].name })}
-            />
-            <span className="input-file-btn">Choose file</span>
-          </label>
-        </div>
+        <CountryDateSelect dateRef={this.dateRef} countryRef={this.countryRef} />
+        <ProductSelect
+          warningProduct={this.state.warningProduct}
+          handleCheckbox={this.handleCheckbox}
+          tvRef={this.tvRef}
+          electroRef={this.electroRef}
+          jewRef={this.jewRef}
+          wclthRef={this.wclthRef}
+          mclthRef={this.mclthRef}
+        />
+        <LikeSelect yesRef={this.yesRef} noRef={this.noRef} />
+        <FileSelect fileRef={this.fileRef} image={this.state.image} />
         <button className="feedback-button" type="submit" form="feedback-form">
           Submit
         </button>
