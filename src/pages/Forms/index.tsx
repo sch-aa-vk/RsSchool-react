@@ -10,7 +10,7 @@ export class Forms extends Component {
   constructor(props: {}) {
     super(props);
     this.state = {
-      data: localStorage['input-feedback'] ? JSON.parse(localStorage['input-feedback']) : '',
+      data: [],
       status: 'in process',
     };
   }
@@ -23,9 +23,6 @@ export class Forms extends Component {
   };
 
   render() {
-    if (!localStorage['input-feedback']) {
-      localStorage['input-feedback'] = '[]';
-    }
     return (
       <div
         className="forms"
@@ -42,7 +39,7 @@ export class Forms extends Component {
           <span className="forms__title-thin">Feedback {this.state.status}</span>
         </h2>
         <div className="form__wrapper">
-          <FormFeedback onUpdateData={this.onUpdateData} />
+          <FormFeedback onUpdateData={this.onUpdateData} data={this.state.data} />
         </div>
         <h2 className="forms__title">Your last feedback</h2>
         <div className="feedback__wrapper">

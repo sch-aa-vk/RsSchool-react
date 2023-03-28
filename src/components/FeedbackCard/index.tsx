@@ -20,9 +20,7 @@ export class FeedbackCard extends Component<IFeedback> {
     return (
       <div className="feedback__card">
         <h2 className="feedback__card-title">{name}</h2>
-        <div className="feedback__card-image">
-          <p className="feedback__card-image-text">{file || 'There is no photo'}</p>
-        </div>
+        <div className="feedback__card-image" style={{ backgroundImage: `url(${file})` }} />
         <div className="feedback__card-products">
           <p className="feedback__card-text">
             <span className="feedback__card-text text-highlighted">Products:</span>

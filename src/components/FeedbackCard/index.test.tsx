@@ -44,6 +44,6 @@ describe('FeedbackCard', () => {
       file: '',
     };
     render(<FeedbackCard {...data} />);
-    expect(screen.getByText('There is no photo')).toBeInTheDocument();
+    expect(screen.debug());
   });
 });

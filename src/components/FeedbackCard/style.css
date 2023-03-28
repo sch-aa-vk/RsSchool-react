@@ -27,17 +27,12 @@
 .feedback__card-image {
   width: 100%;
   height: 200px;
-  background: rgba(91, 143, 185, 0.75);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.feedback__card-image-text {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 300;
-  font-size: 16px;
-  color: #03001C;
 }
 
 .feedback__card-text {
