@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState } from 'react';
 
 import data, { IProduct } from '../../database';
 import { Search } from '../../layouts/Search';
@@ -6,46 +6,44 @@ import { Card } from '../../components/Card';
 
 import './style.css';
 
-export class Home extends Component {
-  state: { value: string; products: IProduct[] };
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-    this.state = {
-      value: localStorage['input-value'] ? localStorage['input-value'] : '',
-      products: data,
-    };
-  }
+export const Home: React.FC = () => {
+  const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
+  const [value, setValue] = useState(initialValue);
+  const [products, setProducts] = useState(data);
 
-  onUpdateSearch = (value: string) => {
-    this.setState({ value });
+  const onUpdateSearch = (value: string) => {
+    setValue(value);
   };
 
-  filterItems = (item: IProduct) => {
-    const val = this.state.value;
-    if (val.length === 0) {
+  const filterItems = (item: IProduct) => {
+    if (value.length === 0) {
       return true;
     }
-    const { title, category, price } = item;
-    return title.includes(val) || category.includes(val) || price.toString().includes(val);
+    const { title, category, price, description } = item;
+    return (
+      title.includes(value) ||
+      category.includes(value) ||
+      price.toString().includes(value) ||
+      description.toLowerCase().includes(value)
+    );
   };
 
-  render() {
-    const products = this.state.products.filter(this.filterItems);
-    return (
-      <>
-        <div className="home">
-          <Search onUpdateSearch={this.onUpdateSearch} />
-          <div className="cards__wrapper">
-            {products.length === 0 ? (
-              <p className="cards__wrapper-text">Sorry, we don`t have this products</p>
-            ) : (
-              products.map((product) => {
-                return <Card key={product.id} {...product} />;
-              })
-            )}
-          </div>
-        </div>
-      </>
-    );
-  }
-}
+  useEffect(() => {
+    setProducts(data.filter(filterItems));
+  }, [value]);
+
+  return (
+    <div className="home">
+      <Search onUpdateSearch={onUpdateSearch} />
+      <div className="cards__wrapper">
+        {products.length === 0 ? (
+          <p className="cards__wrapper-text">Sorry, we don`t have this products</p>
+        ) : (
+          products.map((product) => {
+            return <Card key={product.id} {...product} />;
+          })
+        )}
+      </div>
+    </div>
+  );
+};

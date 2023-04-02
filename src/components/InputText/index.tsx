@@ -1,5 +1,3 @@
-import { Component } from 'react';
-
 import './style.css';
 
 interface IInputText {
@@ -8,15 +6,6 @@ interface IInputText {
   fn: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export class InputText extends Component<IInputText> {
-  render() {
-    return (
-      <input
-        className={`input ${this.props.classname || ''}`}
-        type="text"
-        value={this.props.value}
-        onChange={this.props.fn}
-      />
-    );
-  }
-}
+export const InputText: React.FC<IInputText> = ({ value, classname, fn }: IInputText) => {
+  return <input className={`input ${classname || ''}`} type="text" value={value} onChange={fn} />;
+};

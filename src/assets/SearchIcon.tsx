@@ -1,4 +1,4 @@
-export const SearchIcon = () => (
+export const SearchIcon: React.FC = () => (
   <svg
     width={20}
     height={20}

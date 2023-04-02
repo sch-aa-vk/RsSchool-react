@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { SearchIcon } from '../../assets/SearchIcon';
 import { InputText } from '../../components/InputText';
 
@@ -8,40 +8,27 @@ interface ISearch {
   onUpdateSearch: (value: string) => void;
 }
 
-export class Search extends Component<ISearch> {
-  state: { value: string };
-  constructor(props: ISearch) {
-    super(props);
-    this.state = {
-      value: localStorage['input-value'] ? localStorage['input-value'] : '',
-    };
-  }
+export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
+  const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
+  const [value, setValue] = useState(initialValue);
 
-  componentWillUnmount() {
-    localStorage['input-value'] = this.state.value;
-  }
+  useLayoutEffect(() => {
+    localStorage['input-value'] = value;
+  }, []);
 
-  onUpdateSearch = () => {
-    this.props.onUpdateSearch(this.state.value);
-  };
-
-  render() {
-    return (
-      <div className="search">
-        <div className="search__input-wrapper">
-          <InputText
-            classname="search__input"
-            value={this.state.value}
-            fn={(e: React.ChangeEvent<HTMLInputElement>) =>
-              this.setState({ value: e.target.value })
-            }
-          />
-          <SearchIcon />
-        </div>
-        <button className="search__button" type="button" onClick={this.onUpdateSearch}>
-          Search
-        </button>
+  return (
+    <div className="search">
+      <div className="search__input-wrapper">
+        <InputText
+          classname="search__input"
+          value={value}
+          fn={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+        />
+        <SearchIcon />
       </div>
-    );
-  }
-}
+      <button className="search__button" type="button" onClick={() => onUpdateSearch(value)}>
+        Search
+      </button>
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-export const ErrorIcon = () => (
+export const ErrorIcon: React.FC = () => (
   <svg
     width={160}
     height={160}
