@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { IFeedback } from '../../utils/types';
+import { ProductsChoose } from '../../components/ProductsChoose';
 
 import './style.css';
 
@@ -10,18 +11,6 @@ type IFormFeedback = {
 };
 
 export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null);
-  const countryRef = useRef<HTMLSelectElement>(null);
-  const tvRef = useRef<HTMLInputElement>(null);
-  const electroRef = useRef<HTMLInputElement>(null);
-  const jewRef = useRef<HTMLInputElement>(null);
-  const wclthRef = useRef<HTMLInputElement>(null);
-  const mclthRef = useRef<HTMLInputElement>(null);
-  const yesRef = useRef<HTMLInputElement>(null);
-  const noRef = useRef<HTMLInputElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
-
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
   const [country, setCountry] = useState('');
@@ -59,7 +48,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       const newData = {
         name: name,
         date: date,
-        country: countryRef.current?.value as string,
+        country: country,
         products: {
           tv: tv,
           electronics: electronics,
@@ -68,8 +57,8 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           mclothes: mclothes,
         },
         like: {
-          yes: yesRef.current?.checked as boolean,
-          no: noRef.current?.checked as boolean,
+          yes: yes,
+          no: no,
         },
         file: URL.createObjectURL(file),
       };
@@ -94,19 +83,12 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
     setImage('');
   };
 
-  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) {
-      setWarningProduct(false);
-    }
-  };
-
   return (
     <form className="form-feedback" onSubmit={(e) => handleFromData(e)} id="feedback-form">
       <label className="label label-fullsize">
         Your full name:
         <input
           className="input feedback__input"
-          ref={nameRef}
           type="text"
           value={name}
           onChange={(e) => {
@@ -125,7 +107,6 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           Order date:
           <input
             className="input feedback__input click__pointer"
-            ref={dateRef}
             value={date}
             type="date"
             onChange={(e) => {
@@ -138,7 +119,6 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           Country of order:
           <select
             id="input-name"
-            ref={countryRef}
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             className="input feedback__input click__pointer"
@@ -153,106 +133,26 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
         </label>
       </div>
       {warningDate ? <p className="form-text form-text__warning">enter order date</p> : <></>}
-      <div className="form__block">
-        <p className="form-text">What type of product(s) did you order?</p>
-        {warningProduct ? (
-          <p className="form-text form-text__warning">choose minimum one product!</p>
-        ) : (
-          <></>
-        )}
-        <div className="block-fullsize block__with-margin">
-          <input
-            className="checkbox"
-            ref={tvRef}
-            type="checkbox"
-            id="input-tv"
-            name="order"
-            checked={tv}
-            onChange={(e) => {
-              handleCheckbox(e);
-              setTV(!tv);
-            }}
-          />
-          <label htmlFor="input-tv" className="label label-fullsize label-checkbox">
-            TV
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            ref={electroRef}
-            type="checkbox"
-            id="input-electronics"
-            name="order"
-            checked={electronics}
-            onChange={(e) => {
-              handleCheckbox(e);
-              setElectronics(!electronics);
-            }}
-          />
-          <label htmlFor="input-electronics" className="label label-fullsize label-checkbox">
-            Electronics
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            ref={jewRef}
-            type="checkbox"
-            id="input-jewelery"
-            name="order"
-            checked={jewelery}
-            onChange={(e) => {
-              handleCheckbox(e);
-              setJewelery(!jewelery);
-            }}
-          />
-          <label htmlFor="input-jewelery" className="label label-fullsize label-checkbox">
-            Jewelery
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            ref={wclthRef}
-            id="input-women-clothes"
-            type="checkbox"
-            name="order"
-            checked={wclothes}
-            onChange={(e) => {
-              handleCheckbox(e);
-              setWclothes(!wclothes);
-            }}
-          />
-          <label htmlFor="input-women-clothes" className="label label-fullsize label-checkbox">
-            Women clothes
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            ref={mclthRef}
-            id="input-men-clothes"
-            type="checkbox"
-            name="order"
-            checked={mclothes}
-            onChange={(e) => {
-              handleCheckbox(e);
-              setMclothes(!mclothes);
-            }}
-          />
-          <label htmlFor="input-men-clothes" className="label label-fullsize label-checkbox">
-            Men clothes
-          </label>
-        </div>
-      </div>
+      <ProductsChoose
+        tv={tv}
+        setTV={setTV}
+        electronics={electronics}
+        setElectronics={setElectronics}
+        jewelery={jewelery}
+        setJewelery={setJewelery}
+        wclothes={wclothes}
+        setWclothes={setMclothes}
+        mclothes={mclothes}
+        setMclothes={setMclothes}
+        warningProduct={warningProduct}
+        setWarningProduct={setWarningProduct}
+      />
       <div className="form__block form__block-row form__block-start">
         <p className="form-text">Did you like our products?</p>
         <div className="form__block form__block-row form__block-no-margin">
           <label htmlFor="input-yes" className="label label-radio">
             yes
             <input
-              ref={yesRef}
               type="radio"
               name="like"
               id="input-yes"
@@ -261,10 +161,9 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
             />
           </label>
           <label htmlFor="input-no" className="label label-radio">
-            no{' '}
+            no
             <input
               type="radio"
-              ref={noRef}
               name="like"
               id="input-no"
               checked={no}
@@ -272,7 +171,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
             />
           </label>
         </div>
-      </div>{' '}
+      </div>
       <div className="form__block form__block-row">
         <p className="form-text">Image of your order:</p>
         <label className="input-file">
@@ -280,7 +179,6 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           <input
             type="file"
             name="file"
-            ref={fileRef}
             onChange={(e) => {
               setImage(e.target.files![0].name);
               setWarningFile(false);
