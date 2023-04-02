@@ -9,7 +9,6 @@ import './style.css';
 export const Home: React.FC = () => {
   const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
   const [value, setValue] = useState(initialValue);
-  const [products, setProducts] = useState(data);
 
   const onUpdateSearch = (value: string) => {
     setValue(value);
@@ -28,8 +27,11 @@ export const Home: React.FC = () => {
     );
   };
 
+  const [products, setProducts] = useState(data.filter(filterItems));
+
   useEffect(() => {
     setProducts(data.filter(filterItems));
+    localStorage['input-value'] = value;
   }, [value]);
 
   return (
