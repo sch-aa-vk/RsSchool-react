@@ -1,103 +1,61 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { SubmitHandler, useForm } from 'react-hook-form';
+import './style.css';
 import React, { useState } from 'react';
 import { IFeedback } from '../../utils/types';
-import { ProductsChoose } from '../../components/ProductsChoose';
 
-import './style.css';
+interface IFeedbackData {
+  name: string;
+  date: string;
+  country: string;
+  like: string;
+  file: FileList;
+}
 
-type IFormFeedback = {
+interface IFormFeedback {
   onUpdateData: (data: Array<IFeedback>) => void;
   data: Array<IFeedback>;
-};
+}
 
 export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [country, setCountry] = useState('');
-  const [tv, setTV] = useState(false);
-  const [electronics, setElectronics] = useState(false);
-  const [jewelery, setJewelery] = useState(false);
-  const [wclothes, setWclothes] = useState(false);
-  const [mclothes, setMclothes] = useState(false);
-  const initialFile = {} as File;
-  const [file, setFile] = useState(initialFile);
-  const [yes, setYes] = useState(true);
-  const [no, setNo] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFeedbackData>();
+  const [fileName, setFileName] = useState('');
+  const [checkboxTV, setCheckboxTV] = useState(false);
+  const [checkboxJewelery, setCheckboxJewelery] = useState(false);
+  const [checkboxElectronics, setCheckboxElectronics] = useState(false);
+  const [checkboxWclothes, setCheckboxWclothes] = useState(false);
+  const [checkboxMclothes, setCheckboxMclothes] = useState(false);
 
-  const [warningProduct, setWarningProduct] = useState(false);
-  const [warningName, setWarningName] = useState(false);
-  const [warningFile, setWarningFile] = useState(false);
-  const [warningDate, setWarningDate] = useState(false);
-  const [image, setImage] = useState('');
-
-  const handleFromData = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!/^[a-zA-Z]+ [a-zA-Z]+$/.test(name)) {
-      setWarningName(true);
-    }
-    if (!date) {
-      setWarningDate(true);
-    }
-    if (!(tv || electronics || wclothes || mclothes || jewelery)) {
-      setWarningProduct(true);
-    }
-    if (!file.name) {
-      setWarningFile(true);
-    }
-    if (!warningDate && !warningFile && !warningName && !warningProduct && file.name) {
-      const newData = {
-        name: name,
-        date: date,
-        country: country,
-        products: {
-          tv: tv,
-          electronics: electronics,
-          jewelery: jewelery,
-          wclothes: wclothes,
-          mclothes: mclothes,
-        },
-        like: {
-          yes: yes,
-          no: no,
-        },
-        file: URL.createObjectURL(file),
-      };
-      const feedback = [...data, newData];
-      onUpdateData(feedback);
-      setInitialValues();
-    }
-  };
-
-  const setInitialValues = () => {
-    setName('');
-    setDate('');
-    setCountry('kz');
-    setTV(false);
-    setElectronics(false);
-    setWclothes(false);
-    setMclothes(false);
-    setJewelery(false);
-    setYes(true);
-    setNo(false);
-    setFile({} as File);
-    setImage('');
+  const onSubmit: SubmitHandler<IFeedbackData> = (feedbackData) => {
+    const newData = {
+      ...feedbackData,
+      products: {
+        tv: checkboxTV,
+        electronics: checkboxElectronics,
+        jewelery: checkboxJewelery,
+        wclothes: checkboxWclothes,
+        mclothes: checkboxMclothes,
+      },
+    };
+    onUpdateData([...data, newData]);
+    console.log(newData);
   };
 
   return (
-    <form className="form-feedback" onSubmit={(e) => handleFromData(e)} id="feedback-form">
+    <form className="form-feedback" id="feedback-form" onSubmit={handleSubmit(onSubmit)}>
       <label className="label label-fullsize">
         Your full name:
         <input
           className="input feedback__input"
           type="text"
-          value={name}
-          onChange={(e) => {
-            setWarningName(false);
-            setName(e.target.value);
-          }}
+          {...register('name', { required: true })}
         />
       </label>
-      {warningName ? (
+      {errors.name ? (
         <p className="form-text form-text__warning">enter name and surname in english</p>
       ) : (
         <></>
@@ -107,21 +65,16 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           Order date:
           <input
             className="input feedback__input click__pointer"
-            value={date}
             type="date"
-            onChange={(e) => {
-              setWarningDate(false);
-              setDate(e.target.value);
-            }}
+            {...register('date', { required: true })}
           />
         </label>
         <label htmlFor="input-country" className="label label-fullsize">
           Country of order:
           <select
             id="input-name"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
             className="input feedback__input click__pointer"
+            {...register('country')}
           >
             <option value="kz" defaultChecked>
               Kazakhstan
@@ -132,21 +85,91 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           </select>
         </label>
       </div>
-      {warningDate ? <p className="form-text form-text__warning">enter order date</p> : <></>}
-      <ProductsChoose
-        tv={tv}
-        setTV={setTV}
-        electronics={electronics}
-        setElectronics={setElectronics}
-        jewelery={jewelery}
-        setJewelery={setJewelery}
-        wclothes={wclothes}
-        setWclothes={setMclothes}
-        mclothes={mclothes}
-        setMclothes={setMclothes}
-        warningProduct={warningProduct}
-        setWarningProduct={setWarningProduct}
-      />
+      {errors.date ? <p className="form-text form-text__warning">enter order date</p> : <></>}
+      <div className="form__block">
+        <p className="form-text">What type of product(s) did you order?</p>
+        {!(
+          checkboxElectronics ||
+          checkboxJewelery ||
+          checkboxMclothes ||
+          checkboxTV ||
+          checkboxWclothes
+        ) && errors.file ? (
+          <p className="form-text form-text__warning">choose minimum one product!</p>
+        ) : (
+          <></>
+        )}
+        <div className="block-fullsize block__with-margin">
+          <input
+            className="checkbox"
+            id="checkbox-tv"
+            type="checkbox"
+            checked={checkboxTV}
+            onChange={() => setCheckboxTV(!checkboxTV)}
+            value="tv"
+            name="order"
+          />
+          <label htmlFor="checkbox-tv" className="label label-fullsize label-checkbox">
+            TV
+          </label>
+        </div>
+        <div className="block-fullsize">
+          <input
+            className="checkbox"
+            id="checkbox-electronics"
+            type="checkbox"
+            checked={checkboxElectronics}
+            onChange={() => setCheckboxElectronics(!checkboxElectronics)}
+            value="electronics"
+            name="order"
+          />
+          <label htmlFor="checkbox-electronics" className="label label-fullsize label-checkbox">
+            Electronics
+          </label>
+        </div>
+        <div className="block-fullsize">
+          <input
+            className="checkbox"
+            id="checkbox-jewelery"
+            type="checkbox"
+            checked={checkboxJewelery}
+            onChange={() => setCheckboxJewelery(!checkboxJewelery)}
+            value="jewelery"
+            name="order"
+          />
+          <label htmlFor="checkbox-jewelery" className="label label-fullsize label-checkbox">
+            Jewelery
+          </label>
+        </div>
+        <div className="block-fullsize">
+          <input
+            className="checkbox"
+            id="checkbox-wclothes"
+            type="checkbox"
+            checked={checkboxWclothes}
+            onChange={() => setCheckboxWclothes(!checkboxWclothes)}
+            value="women-clothes"
+            name="order"
+          />
+          <label htmlFor="checkbox-wclothes" className="label label-fullsize label-checkbox">
+            Women clothes
+          </label>
+        </div>
+        <div className="block-fullsize">
+          <input
+            className="checkbox"
+            id="checkbox-mclothes"
+            type="checkbox"
+            checked={checkboxMclothes}
+            onChange={() => setCheckboxMclothes(!checkboxMclothes)}
+            value="men-clothes"
+            name="order"
+          />
+          <label htmlFor="checkbox-mclothes" className="label label-fullsize label-checkbox">
+            Men clothes
+          </label>
+        </div>
+      </div>
       <div className="form__block form__block-row form__block-start">
         <p className="form-text">Did you like our products?</p>
         <div className="form__block form__block-row form__block-no-margin">
@@ -154,20 +177,20 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
             yes
             <input
               type="radio"
-              name="like"
+              value="yes"
+              {...register('like', { required: true })}
               id="input-yes"
-              checked={yes}
-              onChange={() => setYes(!yes)}
+              defaultChecked={true}
             />
           </label>
           <label htmlFor="input-no" className="label label-radio">
             no
             <input
               type="radio"
-              name="like"
+              value="no"
+              {...register('like', { required: true })}
               id="input-no"
-              checked={no}
-              onChange={() => setNo(!no)}
+              defaultChecked={false}
             />
           </label>
         </div>
@@ -175,20 +198,16 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       <div className="form__block form__block-row">
         <p className="form-text">Image of your order:</p>
         <label className="input-file">
-          <span className="input-file-text">{image}</span>
+          <span className="input-file-text">{fileName}</span>
           <input
             type="file"
-            name="file"
-            onChange={(e) => {
-              setImage(e.target.files![0].name);
-              setWarningFile(false);
-              setFile(e.target.files![0]);
-            }}
+            {...register('file', { required: true })}
+            onChange={(e) => setFileName(e.target.files![0] ? e.target.files![0].name : '')}
           />
           <span className="input-file-btn">Choose file</span>
         </label>
       </div>
-      {warningFile ? <p className="form-text form-text__warning">upload one image</p> : <></>}
+      {errors.file ? <p className="form-text form-text__warning">upload one image</p> : <></>}
       <button className="feedback-button" type="submit" form="feedback-form">
         Submit
       </button>

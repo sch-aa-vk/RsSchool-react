@@ -9,9 +9,6 @@ export interface IFeedback {
     wclothes: boolean;
     mclothes: boolean;
   };
-  like: {
-    yes: boolean;
-    no: boolean;
-  };
-  file: string;
+  like: string;
+  file: FileList;
 }

@@ -30,8 +30,11 @@ export const Home: React.FC = () => {
   const [products, setProducts] = useState(data.filter(filterItems));
 
   useEffect(() => {
-    setProducts(data.filter(filterItems));
     localStorage['input-value'] = value;
+  }, [products]);
+
+  useEffect(() => {
+    setProducts(data.filter(filterItems));
   }, [value]);
 
   return (

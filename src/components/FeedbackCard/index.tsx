@@ -7,7 +7,6 @@ import './style.css';
 export const FeedbackCard: React.FC<IFeedback> = (data) => {
   const { name, date, country, products, like, file } = data;
   const { tv, electronics, jewelery, wclothes, mclothes } = products;
-  const { yes } = like;
   const items = [
     tv ? 'television' : '',
     electronics ? 'electronics' : '',
@@ -19,7 +18,10 @@ export const FeedbackCard: React.FC<IFeedback> = (data) => {
   return (
     <div className="feedback__card">
       <h2 className="feedback__card-title">{name}</h2>
-      <div className="feedback__card-image" style={{ backgroundImage: `url(${file})` }} />
+      <div
+        className="feedback__card-image"
+        style={{ backgroundImage: `url(${URL.createObjectURL(file[0])})` }}
+      />
       <div className="feedback__card-products">
         <p className="feedback__card-text">
           <span className="feedback__card-text text-highlighted">Products:</span>
@@ -29,7 +31,7 @@ export const FeedbackCard: React.FC<IFeedback> = (data) => {
       <div className="feedback__card-description">
         <p className="feedback__card-text">{country}</p>
         <p className="feedback__card-text">{date}</p>
-        {yes ? <HeartIcon /> : <BrokenHeartIcon />}
+        {like === 'yes' ? <HeartIcon /> : <BrokenHeartIcon />}
       </div>
     </div>
   );
