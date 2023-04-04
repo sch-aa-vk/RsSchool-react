@@ -20,7 +20,9 @@ export const FeedbackCard: React.FC<IFeedback> = (data) => {
       <h2 className="feedback__card-title">{name}</h2>
       <div
         className="feedback__card-image"
-        style={{ backgroundImage: `url(${URL.createObjectURL(file[0])})` }}
+        style={{
+          backgroundImage: `${file.length > 0 ? `url(${URL.createObjectURL(file[0])})` : ''}`,
+        }}
       />
       <div className="feedback__card-products">
         <p className="feedback__card-text">

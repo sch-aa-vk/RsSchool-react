@@ -6,42 +6,12 @@ import { FeedbackCard } from '.';
 describe('FeedbackCard', () => {
   it('Render feedback card component', () => {
     const data = {
-      name: 'Test Name',
-      date: '01-03-2023',
-      country: 'ru',
-      products: {
-        tv: false,
-        electronics: true,
-        jewelery: true,
-        wclothes: false,
-        mclothes: false,
-      },
-      like: {
-        yes: true,
-        no: false,
-      },
-      file: 'test.jpeg',
-    };
-    render(<FeedbackCard {...data} />);
-    expect(screen.debug());
-  });
-  it('Render alternative filename', () => {
-    const data = {
-      name: 'Test Name',
-      date: '01-03-2023',
-      country: 'ru',
-      products: {
-        tv: false,
-        electronics: true,
-        jewelery: true,
-        wclothes: false,
-        mclothes: false,
-      },
-      like: {
-        yes: false,
-        no: true,
-      },
-      file: '',
+      name: 'amina',
+      date: '2023-04-06',
+      country: 'kz',
+      like: 'yes',
+      file: {} as FileList,
+      products: { tv: false, electronics: true, jewelery: false, wclothes: true, mclothes: false },
     };
     render(<FeedbackCard {...data} />);
     expect(screen.debug());

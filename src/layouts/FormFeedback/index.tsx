@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { SubmitHandler, useForm } from 'react-hook-form';
 import './style.css';
 import React, { useState } from 'react';
@@ -22,6 +21,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IFeedbackData>();
   const [fileName, setFileName] = useState('');
   const [checkboxTV, setCheckboxTV] = useState(false);
@@ -42,7 +42,23 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       },
     };
     onUpdateData([...data, newData]);
-    console.log(newData);
+    clearForm();
+  };
+
+  const clearForm = () => {
+    reset({
+      name: '',
+      date: '',
+      country: '',
+      like: 'yes',
+      file: undefined,
+    });
+    setCheckboxTV(false);
+    setCheckboxElectronics(false);
+    setCheckboxJewelery(false);
+    setCheckboxWclothes(false);
+    setCheckboxMclothes(false);
+    setFileName('');
   };
 
   return (
@@ -202,7 +218,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           <input
             type="file"
             {...register('file', { required: true })}
-            onChange={(e) => setFileName(e.target.files![0] ? e.target.files![0].name : '')}
+            onChange={(e) => setFileName(e.target.files ? e.target.files?.[0].name : '')}
           />
           <span className="input-file-btn">Choose file</span>
         </label>
