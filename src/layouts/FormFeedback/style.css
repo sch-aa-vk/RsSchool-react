@@ -219,3 +219,7 @@
   color: #fff;
   background: #5B8FB9;
 }
+
+.input.feedback__input {
+  padding: 5px 10px;
+}

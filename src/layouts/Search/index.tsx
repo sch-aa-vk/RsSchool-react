@@ -1,6 +1,5 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { SearchIcon } from '../../assets/SearchIcon';
-import { InputText } from '../../components/InputText';
 
 import './style.css';
 
@@ -10,19 +9,30 @@ interface ISearch {
 
 export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
   const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
+  const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState(initialValue);
 
   useLayoutEffect(() => {
     localStorage['input-value'] = value;
   }, []);
 
+  useEffect(() => {
+    const input = inputRef.current;
+    const inputValueInLocalStorage = localStorage['input-value'];
+    if (input && inputValueInLocalStorage) input.value = inputValueInLocalStorage;
+    return () => {
+      if (input) localStorage['input-value'] = input.value;
+    };
+  }, []);
+
   return (
     <div className="search">
       <div className="search__input-wrapper">
-        <InputText
-          classname="search__input"
+        <input
+          className="input search__input"
           value={value}
-          fn={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
+          ref={inputRef}
         />
         <SearchIcon />
       </div>
