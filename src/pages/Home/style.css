@@ -1,0 +1,29 @@
+.home {
+  width: 100%;
+  padding: 40px 10px 0;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards__wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards__wrapper-text {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 200;
+  font-size: 30px;
+  color: #03001C;
+  text-align: center;
+}
+
+@media screen and (max-width: 510px) {
+  .search__input {
+    width: 300px;
+  }
+}
