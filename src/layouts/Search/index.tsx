@@ -25,6 +25,10 @@ export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
     };
   }, []);
 
+  const fnUpdateSearch = () => {
+    onUpdateSearch(value);
+  };
+
   return (
     <div className="search">
       <div className="search__input-wrapper">
@@ -33,10 +37,11 @@ export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
           value={value}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)}
           ref={inputRef}
+          placeholder="Search by name"
         />
         <SearchIcon />
       </div>
-      <button className="search__button" type="button" onClick={() => onUpdateSearch(value)}>
+      <button className="search__button" type="button" onClick={fnUpdateSearch}>
         Search
       </button>
     </div>

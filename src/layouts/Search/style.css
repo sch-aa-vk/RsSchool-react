@@ -39,6 +39,13 @@
   background: none;
 }
 
+.input::placeholder {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #537FE7;
+}
+
 .search__input {
   width: 400px;
 }
