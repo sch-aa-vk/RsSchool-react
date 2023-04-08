@@ -1,0 +1,119 @@
+.full-home-card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  padding: 40px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.full-home-card__wrapper {
+  position: relative;
+  width: 900px;
+  height: max-content;
+  padding: 25px 10px 10px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  cursor: auto;
+}
+
+.full-home-card__wrapper > .close-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+  .full-home-card__wrapper {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .full-home-card__wrapper {
+    width: 500px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .full-home-card__wrapper {
+    width: 420px;
+  }
+}
+
+@media screen and (max-width: 440px) {
+  .full-home-card__wrapper {
+    width: 300px;
+  }
+}
+
+.full-home-card__title {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #03001C;
+}
+
+.full-home-card__title-center {
+  text-align: center;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.full-home-card__video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-home-card__video-iframe {
+  margin: 20px 0;
+  width: 800px;
+  height: 400px;
+}
+
+@media screen and (max-width: 860px) {
+  .full-home-card__video-iframe {
+    margin: 10px 0;
+    width: 400px;
+    height: 200px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .full-home-card__video-iframe {
+    margin: 5px 0;
+    width: 260px;
+    height: 130px;
+  }
+}
+
+.full-home-card__descriptions {
+  padding: 0 15px 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.full-home-card__text {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: rgb(40, 40, 42);
+}
+
+.full-home-card__text-blue {
+  margin-right: 5px;
+  font-size: 24px;
+  color: #5B8FB9;
+}
+
+.full-home-card__text-blue-margin {
+  margin: 0 20px;
+}

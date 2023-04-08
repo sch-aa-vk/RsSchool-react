@@ -74,7 +74,7 @@ export interface ICard {
   favorites: number;
   synopsis: string;
   background: string;
-  season: 'summer';
+  season: string;
   year: number;
   broadcast: {
     day: string;
