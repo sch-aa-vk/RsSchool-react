@@ -2,6 +2,7 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
 import { FeedbackCard } from '.';
+import { HeartIcon } from '../../assets/HeartIcon';
 
 describe('FeedbackCard', () => {
   it('Render feedback card component', () => {
@@ -14,6 +15,8 @@ describe('FeedbackCard', () => {
       products: { tv: false, electronics: true, jewelery: false, wclothes: true, mclothes: false },
     };
     render(<FeedbackCard {...data} />);
-    expect(screen.debug());
+    expect(screen.getByText(data.name)).toBeInTheDocument();
+    expect(screen.getByText('electronics, women clothes')).toBeInTheDocument();
+    expect(<HeartIcon />);
   });
 });

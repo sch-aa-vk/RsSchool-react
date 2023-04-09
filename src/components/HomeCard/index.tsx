@@ -13,9 +13,7 @@ export const HomeCard: React.FC<IHomeCard> = ({ item }: IHomeCard) => {
   const image = item.images.jpg.large_image_url;
   const [isOpen, setIsOpen] = useState(false);
 
-  const openFullCard = () => {
-    setIsOpen(!isOpen);
-  };
+  const openFullCard = () => setIsOpen(!isOpen);
 
   return (
     <div className="home-card" onClick={openFullCard}>

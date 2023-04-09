@@ -33,7 +33,7 @@ export interface ICard {
     url: string;
     embed_url: string;
   };
-  approved: true;
+  approved: boolean;
   titles: Array<{
     type: string;
     title: string;
@@ -61,8 +61,8 @@ export interface ICard {
         month: number;
         year: number;
       };
-      string: string;
     };
+    string: string;
   };
   duration: string;
   rating: string;

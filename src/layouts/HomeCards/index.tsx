@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { HomeCard } from '../../components/HomeCard';
 import { ICard } from '../../utils/types';
+import { LoadingIcon } from '../../assets/LoadingIcon';
+import { fetchData } from '../../utils/requests';
 
 import './style.css';
-import { LoadingIcon } from '../../assets/LoadingIcon';
 
 interface IHomeCards {
   value: string;
@@ -22,9 +23,9 @@ export const HomeCards: React.FC<IHomeCards> = ({ value }: IHomeCards) => {
   const getDataFromApi = async () => {
     setIsPending(true);
     try {
-      await fetch(` https://api.jikan.moe/v4/anime?q=${value}&sfw`)
-        .then((res) => res.json())
-        .then((res) => (res ? setData(res.data) : setData([])));
+      const res = await fetchData(`https://api.jikan.moe/v4/anime?q=${value}&sfw`);
+      // const res = await fetchData(`https://api.jikan.moe/v4/anime?page=1`);
+      setData(res ? res.data : []);
     } catch (err) {
       console.log(err);
     } finally {
@@ -37,9 +38,8 @@ export const HomeCards: React.FC<IHomeCards> = ({ value }: IHomeCards) => {
     if (pageNum < 945) {
       setIsLoading(true);
       try {
-        await fetch(` https://api.jikan.moe/v4/anime?sfw&page=${pageNum}`)
-          .then((res) => res.json())
-          .then((res) => (res ? setData([...data, ...res.data]) : setData([])));
+        const res = await fetchData(`https://api.jikan.moe/v4/anime?sfw&page=${pageNum}`);
+        setData(res ? [...data, ...res.data] : []);
       } catch (err) {
         console.log(err);
       } finally {

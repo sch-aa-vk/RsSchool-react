@@ -9,7 +9,7 @@ export const Home: React.FC = () => {
   const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
   const [value, setValue] = useState(initialValue);
 
-  const onUpdateSearch = async (value: string) => {
+  const onUpdateSearch = (value: string) => {
     setValue(value);
   };
 
