@@ -22,6 +22,7 @@ export const HomeCard: React.FC<IHomeCard> = ({ item }: IHomeCard) => {
           <StarIcon fill="#fff" />
           <p className="home-card__rate-text">{item.score || '?'}</p>
         </div>
+        <h3 className="home-card__title home-card__title-japanese">{item.title_japanese}</h3>
       </div>
       <h3 className="home-card__title">{item.title}</h3>
       <div className="home-card__info">

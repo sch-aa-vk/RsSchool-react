@@ -16,6 +16,13 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.home-card__image-wrapper:hover .home-card__title-japanese,
+.home-card__image-wrapper:active .home-card__title-japanese,
+.home-card__image-wrapper:focus .home-card__title-japanese {
+  bottom: 0px;
 }
 
 .home-card__rate {
@@ -69,4 +76,13 @@
 .home-card__info-text_blue {
   color: #5B8FB9;
   margin-right: 5px;
+}
+
+.home-card__title-japanese {
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  transition: all linear 0.25s;
 }
