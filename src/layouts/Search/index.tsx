@@ -27,10 +27,17 @@ export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
 
   const fnUpdateSearch = () => {
     onUpdateSearch(value);
+    localStorage['input-value'] = value;
+  };
+
+  const handleKeyPressed = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      fnUpdateSearch();
+    }
   };
 
   return (
-    <div className="search">
+    <div className="search" onKeyDown={handleKeyPressed}>
       <div className="search__input-wrapper">
         <input
           className="input search__input"
