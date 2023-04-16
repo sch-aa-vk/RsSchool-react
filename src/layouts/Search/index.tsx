@@ -1,4 +1,7 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import store from '../../store/store';
+import { inputValueUpdate } from '../../store/slices/inputValue.slice';
 import { SearchIcon } from '../../assets/SearchIcon';
 
 import './style.css';
@@ -8,26 +11,14 @@ interface ISearch {
 }
 
 export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
-  const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
+  const initialValue = store.getState().inputValue;
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState(initialValue);
-
-  useLayoutEffect(() => {
-    localStorage['input-value'] = value;
-  }, []);
-
-  useEffect(() => {
-    const input = inputRef.current;
-    const inputValueInLocalStorage = localStorage['input-value'];
-    if (input && inputValueInLocalStorage) input.value = inputValueInLocalStorage;
-    return () => {
-      if (input) localStorage['input-value'] = input.value;
-    };
-  }, []);
+  const dispatch = useDispatch();
 
   const fnUpdateSearch = () => {
     onUpdateSearch(value);
-    localStorage['input-value'] = value;
+    dispatch(inputValueUpdate(value));
   };
 
   const handleKeyPressed = (e: React.KeyboardEvent<HTMLDivElement>) => {

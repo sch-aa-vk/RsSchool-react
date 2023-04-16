@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import store from '../../store/store';
 import { FeedbackCard } from '../../components/FeedbackCard';
 import { FormFeedback } from '../../layouts/FormFeedback';
 import { IFeedback } from '../../utils/types';
@@ -6,12 +7,12 @@ import { IFeedback } from '../../utils/types';
 import './style.css';
 
 export const Forms: React.FC = () => {
-  const initialData: Array<IFeedback> = [];
+  const initialData: Array<IFeedback> = store.getState().feedbackCards;
   const [data, setData] = useState(initialData);
   const [status, setStatus] = useState('in process');
 
-  const onUpdateData = (data: Array<IFeedback>) => {
-    setData(data);
+  const onUpdateData = () => {
+    setData(store.getState().feedbackCards);
     setStatus('confirmed');
     setTimeout(() => {
       setStatus('in process');
@@ -34,7 +35,7 @@ export const Forms: React.FC = () => {
         <span className="forms__title-thin">Feedback {status}</span>
       </h2>
       <div className="form__wrapper">
-        <FormFeedback onUpdateData={onUpdateData} data={data} />
+        <FormFeedback onUpdateData={onUpdateData} />
       </div>
       <h2 className="forms__title">Your last feedback</h2>
       <div className="feedback__wrapper">

@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-
+import store from '../../store/store';
+import { fetchDataFromApi } from '../../store/slices/inputSearch.slice';
+import { useAppDispatch } from '../../store/store.dispatch';
+import { fetchMoreDataFromApi } from '../../store/slices/inputSearchMore.slice';
 import { HomeCard } from '../../components/HomeCard';
 import { ICard } from '../../utils/types';
 import { LoadingIcon } from '../../assets/LoadingIcon';
-import { fetchData } from '../../utils/requests';
 
 import './style.css';
 
@@ -12,8 +14,10 @@ interface IHomeCards {
 }
 
 export const HomeCards: React.FC<IHomeCards> = ({ value }: IHomeCards) => {
-  const [data, setData] = useState<Array<ICard>>([]);
-  const [isPending, setIsPending] = useState(false);
+  const { data: initialData } = store.getState().inputSearch;
+  const [data, setData] = useState<Array<ICard>>(initialData);
+  const dispatch = useAppDispatch();
+  const [isPending, setIsPending] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -22,30 +26,19 @@ export const HomeCards: React.FC<IHomeCards> = ({ value }: IHomeCards) => {
 
   const getDataFromApi = async () => {
     setIsPending(true);
-    try {
-      const res = await fetchData(`https://api.jikan.moe/v4/anime?q=${value}&sfw`);
-      // const res = await fetchData(`https://api.jikan.moe/v4/anime?page=1`);
-      setData(res ? res.data : []);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsPending(false);
-    }
+    await dispatch(fetchDataFromApi(value));
+    setData(store.getState().inputSearch.data);
+    setIsPending(false);
   };
 
   const loadMoreData = async () => {
     const pageNum = Math.floor(data.length / 25) + 1;
     if (pageNum < 945) {
       setIsLoading(true);
-      try {
-        const res = await fetchData(`https://api.jikan.moe/v4/anime?sfw&page=${pageNum}`);
-        setData(res ? [...data, ...res.data] : []);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setIsLoading(false);
-      }
+      await dispatch(fetchMoreDataFromApi(pageNum));
+      setData([...data, ...store.getState().inputSearchMore.data]);
     }
+    setIsLoading(false);
   };
 
   return (
