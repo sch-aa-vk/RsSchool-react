@@ -1,7 +1,10 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import './style.css';
 import React, { useState } from 'react';
-import { IFeedback } from '../../utils/types';
+import { useDispatch } from 'react-redux';
+import { addFeedback } from '../../store/slices/feedbackCards.slice';
+import { FeedbackCheckbox } from '../../components/FeedbackCheckbox';
+
+import './style.css';
 
 interface IFeedbackData {
   name: string;
@@ -12,11 +15,10 @@ interface IFeedbackData {
 }
 
 interface IFormFeedback {
-  onUpdateData: (data: Array<IFeedback>) => void;
-  data: Array<IFeedback>;
+  onUpdateData: () => void;
 }
 
-export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) => {
+export const FormFeedback: React.FC<IFormFeedback> = ({ onUpdateData }) => {
   const {
     register,
     handleSubmit,
@@ -24,24 +26,58 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
     reset,
   } = useForm<IFeedbackData>();
   const [fileName, setFileName] = useState('');
-  const [checkboxTV, setCheckboxTV] = useState(false);
-  const [checkboxJewelery, setCheckboxJewelery] = useState(false);
-  const [checkboxElectronics, setCheckboxElectronics] = useState(false);
-  const [checkboxWclothes, setCheckboxWclothes] = useState(false);
-  const [checkboxMclothes, setCheckboxMclothes] = useState(false);
+  const [checkbox1, setCheckbox1] = useState(false);
+  const [checkbox2, setCheckbox2] = useState(false);
+  const [checkbox3, setCheckbox3] = useState(false);
+  const [checkbox4, setCheckbox4] = useState(false);
+  const [checkbox5, setCheckbox5] = useState(false);
+  const checkboxes = [
+    {
+      id: 0,
+      name: 'Comedy',
+      state: checkbox1,
+      fnState: setCheckbox1,
+    },
+    {
+      id: 1,
+      name: 'Romance',
+      state: checkbox2,
+      fnState: setCheckbox2,
+    },
+    {
+      id: 2,
+      name: 'Seinen',
+      state: checkbox3,
+      fnState: setCheckbox3,
+    },
+    {
+      id: 3,
+      name: 'Horor',
+      state: checkbox4,
+      fnState: setCheckbox4,
+    },
+    {
+      id: 4,
+      name: 'Drama',
+      state: checkbox5,
+      fnState: setCheckbox5,
+    },
+  ];
+  const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<IFeedbackData> = (feedbackData) => {
     const newData = {
       ...feedbackData,
-      products: {
-        tv: checkboxTV,
-        electronics: checkboxElectronics,
-        jewelery: checkboxJewelery,
-        wclothes: checkboxWclothes,
-        mclothes: checkboxMclothes,
-      },
+      products: [
+        checkbox1 ? checkboxes[0].name : '',
+        checkbox2 ? checkboxes[1].name : '',
+        checkbox3 ? checkboxes[2].name : '',
+        checkbox4 ? checkboxes[3].name : '',
+        checkbox5 ? checkboxes[4].name : '',
+      ],
     };
-    onUpdateData([...data, newData]);
+    dispatch(addFeedback(newData));
+    onUpdateData();
     clearForm();
   };
 
@@ -53,11 +89,11 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       like: 'yes',
       file: undefined,
     });
-    setCheckboxTV(false);
-    setCheckboxElectronics(false);
-    setCheckboxJewelery(false);
-    setCheckboxWclothes(false);
-    setCheckboxMclothes(false);
+    setCheckbox1(false);
+    setCheckbox2(false);
+    setCheckbox3(false);
+    setCheckbox4(false);
+    setCheckbox5(false);
     setFileName('');
   };
 
@@ -78,7 +114,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       )}
       <div className="form__block form__block-row">
         <label className="label label-fullsize">
-          Order date:
+          Day of feedback:
           <input
             className="input feedback__input click__pointer"
             type="date"
@@ -86,7 +122,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
           />
         </label>
         <label htmlFor="input-country" className="label label-fullsize">
-          Country of order:
+          Country of living:
           <select
             id="input-name"
             className="input feedback__input click__pointer"
@@ -103,91 +139,18 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
       </div>
       {errors.date ? <p className="form-text form-text__warning">enter order date</p> : <></>}
       <div className="form__block">
-        <p className="form-text">What type of product(s) did you order?</p>
-        {!(
-          checkboxElectronics ||
-          checkboxJewelery ||
-          checkboxMclothes ||
-          checkboxTV ||
-          checkboxWclothes
-        ) && errors.file ? (
-          <p className="form-text form-text__warning">choose minimum one product!</p>
+        <p className="form-text">What type of anime(s) have you watched?</p>
+        {!(checkbox1 || checkbox2 || checkbox3 || checkbox4 || checkbox5) && errors.file ? (
+          <p className="form-text form-text__warning">choose minimum one anime!</p>
         ) : (
           <></>
         )}
-        <div className="block-fullsize block__with-margin">
-          <input
-            className="checkbox"
-            id="checkbox-tv"
-            type="checkbox"
-            checked={checkboxTV}
-            onChange={() => setCheckboxTV(!checkboxTV)}
-            value="tv"
-            name="order"
-          />
-          <label htmlFor="checkbox-tv" className="label label-fullsize label-checkbox">
-            TV
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            id="checkbox-electronics"
-            type="checkbox"
-            checked={checkboxElectronics}
-            onChange={() => setCheckboxElectronics(!checkboxElectronics)}
-            value="electronics"
-            name="order"
-          />
-          <label htmlFor="checkbox-electronics" className="label label-fullsize label-checkbox">
-            Electronics
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            id="checkbox-jewelery"
-            type="checkbox"
-            checked={checkboxJewelery}
-            onChange={() => setCheckboxJewelery(!checkboxJewelery)}
-            value="jewelery"
-            name="order"
-          />
-          <label htmlFor="checkbox-jewelery" className="label label-fullsize label-checkbox">
-            Jewelery
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            id="checkbox-wclothes"
-            type="checkbox"
-            checked={checkboxWclothes}
-            onChange={() => setCheckboxWclothes(!checkboxWclothes)}
-            value="women-clothes"
-            name="order"
-          />
-          <label htmlFor="checkbox-wclothes" className="label label-fullsize label-checkbox">
-            Women clothes
-          </label>
-        </div>
-        <div className="block-fullsize">
-          <input
-            className="checkbox"
-            id="checkbox-mclothes"
-            type="checkbox"
-            checked={checkboxMclothes}
-            onChange={() => setCheckboxMclothes(!checkboxMclothes)}
-            value="men-clothes"
-            name="order"
-          />
-          <label htmlFor="checkbox-mclothes" className="label label-fullsize label-checkbox">
-            Men clothes
-          </label>
-        </div>
+        {checkboxes.map((checkbox) => {
+          return <FeedbackCheckbox key={checkbox.id} {...checkbox} />;
+        })}
       </div>
       <div className="form__block form__block-row form__block-start">
-        <p className="form-text">Did you like our products?</p>
+        <p className="form-text">Did you like what you saw?</p>
         <div className="form__block form__block-row form__block-no-margin">
           <label htmlFor="input-yes" className="label label-radio">
             yes
@@ -212,7 +175,7 @@ export const FormFeedback: React.FC<IFormFeedback> = ({ data, onUpdateData }) =>
         </div>
       </div>
       <div className="form__block form__block-row">
-        <p className="form-text">Image of your order:</p>
+        <p className="form-text">Upload an image from one anime:</p>
         <label className="input-file">
           <span className="input-file-text">{fileName}</span>
           <input

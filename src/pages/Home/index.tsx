@@ -1,12 +1,12 @@
 import { useState } from 'react';
-
+import store from '../../store/store';
 import { Search } from '../../layouts/Search';
 import { HomeCards } from '../../layouts/HomeCards';
 
 import './style.css';
 
 export const Home: React.FC = () => {
-  const initialValue = localStorage['input-value'] ? localStorage['input-value'] : '';
+  const initialValue = store.getState().inputValue;
   const [value, setValue] = useState(initialValue);
 
   const onUpdateSearch = (value: string) => {
