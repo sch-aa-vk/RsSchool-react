@@ -3,6 +3,8 @@ import { render } from '@testing-library/react';
 import { HomeCards } from '.';
 import { fetchData, fetchedData } from '../../utils/requests';
 import { LoadingIcon } from '../../assets/LoadingIcon';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
 global.fetch = vi.fn(() =>
   Promise.resolve({
@@ -17,7 +19,11 @@ describe('Home Cards', () => {
     expect(todoList).toStrictEqual(todoList);
   });
   test('Renders Loading Icon', () => {
-    render(<HomeCards value="" />);
+    render(
+      <Provider store={store}>
+        <HomeCards value="" />
+      </Provider>
+    );
     expect(<LoadingIcon />);
   });
 });

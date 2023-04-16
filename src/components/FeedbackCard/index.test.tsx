@@ -12,11 +12,11 @@ describe('FeedbackCard', () => {
       country: 'kz',
       like: 'yes',
       file: {} as FileList,
-      products: { tv: false, electronics: true, jewelery: false, wclothes: true, mclothes: false },
+      products: ['comedy', 'drama'],
     };
     render(<FeedbackCard {...data} />);
     expect(screen.getByText(data.name)).toBeInTheDocument();
-    expect(screen.getByText('electronics, women clothes')).toBeInTheDocument();
+    expect(screen.getByText('comedy, drama')).toBeInTheDocument();
     expect(<HeartIcon />);
   });
 });
