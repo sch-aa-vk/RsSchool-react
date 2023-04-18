@@ -7,6 +7,21 @@ export interface IFeedback {
   file: FileList;
 }
 
+export interface IStore {
+  inputValue: {
+    input: string;
+    isNew: boolean;
+  };
+  feedbackCards: IFeedback[];
+  inputSearch: {
+    data: ICard[];
+    pending: boolean;
+  };
+  inputSearchMore: {
+    data: ICard[];
+  };
+}
+
 export interface ICard {
   mal_id: number;
   url: string;

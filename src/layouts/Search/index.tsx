@@ -1,24 +1,20 @@
 import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import store from '../../store/store';
-import { inputValueUpdate } from '../../store/slices/inputValue.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { IStore } from '../../utils/types';
+import { inputValueSetNew, inputValueUpdate } from '../../store/slices/inputValue.slice';
 import { SearchIcon } from '../../assets/SearchIcon';
 
 import './style.css';
 
-interface ISearch {
-  onUpdateSearch: (value: string) => void;
-}
-
-export const Search: React.FC<ISearch> = ({ onUpdateSearch }: ISearch) => {
-  const initialValue = store.getState().inputValue;
+export const Search: React.FC = () => {
+  const { input: initialValue } = useSelector((state: IStore) => state.inputValue);
   const inputRef = useRef<HTMLInputElement>(null);
   const [value, setValue] = useState(initialValue);
   const dispatch = useDispatch();
 
   const fnUpdateSearch = () => {
-    onUpdateSearch(value);
     dispatch(inputValueUpdate(value));
+    dispatch(inputValueSetNew());
   };
 
   const handleKeyPressed = (e: React.KeyboardEvent<HTMLDivElement>) => {
