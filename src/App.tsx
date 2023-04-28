@@ -6,6 +6,8 @@ import { Forms } from './pages/Forms';
 import { Home } from './pages/Home';
 import { Page404 } from './pages/Page404';
 
+import './App.css';
+
 export const App: React.FC = () => {
   return (
     <>
