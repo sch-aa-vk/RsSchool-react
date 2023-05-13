@@ -1,0 +1,18 @@
+.page-404 {
+  width: 100%;
+  padding: 60px 0;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-404__header {
+  max-width: 1440px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 200;
+  font-size: 30px;
+  color: #03001C;
+  text-align: center;
+}
