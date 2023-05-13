@@ -21,7 +21,7 @@ describe('Home Cards', () => {
   test('Renders Loading Icon', () => {
     render(
       <Provider store={store}>
-        <HomeCards value="" />
+        <HomeCards />
       </Provider>
     );
     expect(<LoadingIcon />);
