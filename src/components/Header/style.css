@@ -8,6 +8,15 @@
   align-items: center;
 }
 
+@media screen and (max-width: 400px) {
+  .header {
+    height: max-content;
+    flex-flow: column wrap;
+    gap: 5px;
+    padding: 0 10px 10px;
+  }
+}
+
 .header__path {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-weight: 400;
