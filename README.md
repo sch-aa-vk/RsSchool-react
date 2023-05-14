@@ -4,6 +4,10 @@
 
 This project was made as part of a course from Rolling Scopes School React track.
 
+### Code:
+- The code is written in Typescript, React(Vite) and Redux Toolkit.
+- There are unit-tests.
+
 ### Features: 
 - fully adaptive design (up to 320px)
 - there is a 404 page for processing invalid addresses
