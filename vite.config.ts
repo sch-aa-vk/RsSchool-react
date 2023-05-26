@@ -7,7 +7,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: 'https://sch-aa-vk.github.io/RsSchool-react/',
+  base: '/RsSchool-react/',
   test: {
     globals: true,
     environment: 'jsdom',
@@ -19,6 +19,14 @@ export default defineConfig({
       reporter: 'text',
       include: ['src'],
       exclude: ['src/main.tsx', 'src/vite-env.d.ts', 'src/assets', 'src/utils'],
+    },
+  },
+  server: {
+    proxy: {
+      '/': {
+        target: 'https://sch-aa-vk.github.io/RsSchool-react/',
+        changeOrigin: true,
+      },
     },
   },
 });
