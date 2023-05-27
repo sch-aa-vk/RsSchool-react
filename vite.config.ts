@@ -23,9 +23,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/v4': {
+      '^/v4': {
         target: 'https://api.jikan.moe',
         changeOrigin: true,
+        secure: false,
+        ws: true,
       },
     },
     cors: true,
