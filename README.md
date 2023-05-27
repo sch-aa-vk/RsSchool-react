@@ -1,6 +1,6 @@
 # RsSchool-react
 
->deploy: https://react-project-rsschool.netlify.app
+>deploy: https://sch-aa-vk.github.io/RsSchool-react/#/
 
 This project was made as part of a course from Rolling Scopes School React track.
 
