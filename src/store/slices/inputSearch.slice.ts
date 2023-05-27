@@ -3,7 +3,7 @@ import { fetchData } from '../../utils/requests';
 import { ICard } from '../../utils/types';
 
 export const fetchDataFromApi = createAsyncThunk('inputSearch/fetchData', async (value: string) => {
-  return await fetchData(`https://api.jikan.moe/v4/anime?q=${value}&sfw`);
+  return await fetchData(`/v4/anime?q=${value}&sfw`);
 });
 
 const inputSearch = createSlice({

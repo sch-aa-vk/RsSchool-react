@@ -21,4 +21,13 @@ export default defineConfig({
       exclude: ['src/main.tsx', 'src/vite-env.d.ts', 'src/assets', 'src/utils'],
     },
   },
+  server: {
+    proxy: {
+      '/v4': {
+        target: 'https://api.jikan.moe',
+        changeOrigin: true,
+      },
+    },
+    cors: true,
+  },
 });
